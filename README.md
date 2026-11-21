@@ -36,7 +36,7 @@ Pushing to `main` redeploys the live site automatically (GitHub Actions → GitH
 The printed QR code (files in `print/`) points to **https://ramasleiman.github.io/weguide-cpf/qr/**, a redirect page, not to the deck directly. That means the QR destination can change without reprinting:
 
 1. Open `public/qr/index.html`.
-2. Replace the URL in the three places marked `TARGET` (and the fallback link).
+2. Replace the destination URL everywhere it appears (3 times: the two lines marked `TARGET` and the "Tap here" link).
 3. Commit and push. Every printed QR code follows the new destination in about a minute.
 
 Keep this repository and its name unchanged, or the printed QR codes will stop working.
