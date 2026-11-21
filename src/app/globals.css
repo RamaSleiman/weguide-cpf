@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #1a1530;
+}
+
+@keyframes slide-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: translateY(32px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes pulse-halo {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.3; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+.slide-enter {
+  animation: slide-in 300ms ease-out both;
+}
+
+/* Top-level blocks of every slide rise in, one after another. */
+.slide-enter section > * {
+  animation: rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.slide-enter section > *:nth-child(2) { animation-delay: 110ms; }
+.slide-enter section > *:nth-child(3) { animation-delay: 220ms; }
+.slide-enter section > *:nth-child(4) { animation-delay: 330ms; }
+.slide-enter section > *:nth-child(5) { animation-delay: 440ms; }
+.slide-enter section > *:nth-child(6) { animation-delay: 550ms; }
+.slide-enter section > *:nth-child(n + 7) { animation-delay: 660ms; }
+
+/* Items inside a .stagger container pop in one by one. */
+.stagger > * {
+  animation: pop 750ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(420ms + var(--i, 0) * 135ms);
+}
+.stagger > *:nth-child(1) { --i: 0; }
+.stagger > *:nth-child(2) { --i: 1; }
+.stagger > *:nth-child(3) { --i: 2; }
+.stagger > *:nth-child(4) { --i: 3; }
+.stagger > *:nth-child(5) { --i: 4; }
+.stagger > *:nth-child(6) { --i: 5; }
+.stagger > *:nth-child(7) { --i: 6; }
+.stagger > *:nth-child(8) { --i: 7; }
+
+/* Closing notes that should arrive after a staggered group. */
+.slide-enter section > .late {
+  animation-delay: 1350ms;
+}
+
+.grow-x {
+  transform-origin: left center;
+  animation: grow-x 1350ms cubic-bezier(0.65, 0, 0.35, 1) var(--d, 500ms) both;
+}
+
+/* Network motif */
+.net-line {
+  stroke-dasharray: 1;
+  animation: draw 1700ms ease-out both;
+}
+.net-node {
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+.net-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse-halo 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-enter,
+  .slide-enter section > *,
+  .stagger > *,
+  .grow-x,
+  .net-line,
+  .net-node,
+  .net-halo {
+    animation: none !important;
+  }
+}
+
+@media print {
+  html,
+  body {
+    overflow: visible;
+  }
+}
