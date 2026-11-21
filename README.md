@@ -30,3 +30,13 @@ Each slide has its own URL (`/#7` opens slide 7).
 - Animations: `src/app/globals.css`
 
 Pushing to `main` redeploys the live site automatically (GitHub Actions → GitHub Pages).
+
+## QR code
+
+The printed QR code (files in `print/`) points to **https://ramasleiman.github.io/weguide-cpf/qr/**, a redirect page, not to the deck directly. That means the QR destination can change without reprinting:
+
+1. Open `public/qr/index.html`.
+2. Replace the URL in the three places marked `TARGET` (and the fallback link).
+3. Commit and push. Every printed QR code follows the new destination in about a minute.
+
+Keep this repository and its name unchanged, or the printed QR codes will stop working.
